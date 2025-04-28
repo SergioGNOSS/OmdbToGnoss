@@ -1,0 +1,250 @@
+<config>
+	<ConfiguracionGeneral>
+		<namespace>mkgapersona</namespace>
+		<idiomasOnto>
+			<idiomaOnto>es</idiomaOnto>
+		</idiomasOnto>
+		<ocultarTituloDescpImgDoc/>
+		<TituloDoc EntidadID="http://schema.org/Person">http://schema.org/name</TituloDoc>
+		<DescripcionDoc EntidadID="http://schema.org/Person">http://schema.org/name</DescripcionDoc>
+		<HtmlNuevo>true</HtmlNuevo>
+		<CategorizacionTesauroGnossObligatoria>false</CategorizacionTesauroGnossObligatoria>
+	</ConfiguracionGeneral>
+	<EspefPropiedad>
+		<Propiedad  ID="http://schema.org/iDirector" EntidadID="http://schema.org/Person">
+			<AtrNombre>http://schema.org/iDirector</AtrNombre>
+			<AtrNombreLectura>http://schema.org/iDirector</AtrNombreLectura>
+			<SeleccionEntidad>
+				<NuevaPestanya>false</NuevaPestanya>
+				<TipoSeleccion>Autocompletar</TipoSeleccion>
+				<Grafo>mkgapelicula.owl</Grafo>
+				<UrlTipoEntSolicitada>http://schema.org/Movie</UrlTipoEntSolicitada>
+				<LinkARecurso PropiedadID="http://schema.org/name"></LinkARecurso>
+				<PropsEntLectura>
+					<Propiedad  ID="http://schema.org/name" EntidadID="http://schema.org/Movie">
+						<AtrNombre>Name</AtrNombre>
+						<AtrNombreLectura>Name</AtrNombreLectura>
+					</Propiedad>
+					<Propiedad  ID="http://schema.org/image" EntidadID="http://schema.org/Movie">
+						<AtrNombre>Image</AtrNombre>
+						<AtrNombreLectura>Image</AtrNombreLectura>
+						<TipoCampo>Imagen</TipoCampo>							
+					</Propiedad>
+				</PropsEntLectura>
+				<Reciproca></Reciproca>
+				<ConsultaReciproca>
+
+					<![CDATA[SELECT distinct ?movie WHERE {?movie <http://schema.org/director> ?director.   filter(?director = @EntidadID@)}   limit 5 ]]>
+
+				</ConsultaReciproca>
+			</SeleccionEntidad>
+		</Propiedad>
+		<Propiedad  ID="http://schema.org/iActors" EntidadID="http://schema.org/Person">
+			<AtrNombre></AtrNombre>
+			<AtrNombreLectura></AtrNombreLectura>
+			<SeleccionEntidad>
+				<NuevaPestanya>false</NuevaPestanya>
+				<TipoSeleccion>Autocompletar</TipoSeleccion>
+				<Grafo>mkgapelicula.owl</Grafo>
+				<UrlTipoEntSolicitada>http://schema.org/Movie</UrlTipoEntSolicitada>
+				<LinkARecurso PropiedadID="http://schema.org/name"></LinkARecurso>
+				<PropsEntLectura>
+					<Propiedad  ID="http://schema.org/name" EntidadID="http://schema.org/Movie">
+						<AtrNombre>Name</AtrNombre>
+						<AtrNombreLectura>Name</AtrNombreLectura>
+					</Propiedad>
+					<Propiedad  ID="http://schema.org/image" EntidadID="http://schema.org/Movie">
+						<AtrNombre>Image</AtrNombre>
+						<AtrNombreLectura>Image</AtrNombreLectura>
+						<TipoCampo>Imagen</TipoCampo>
+					</Propiedad>
+				</PropsEntLectura>
+				<Reciproca></Reciproca>
+				<ConsultaReciproca>
+					<![CDATA[
+						SELECT distinct ?movie 
+						WHERE {
+							?movie <http://schema.org/actor> ?actor. 
+							filter(?actor = @EntidadID@ )
+						}  
+						limit 5 
+					]]>
+				</ConsultaReciproca>
+			</SeleccionEntidad>
+		</Propiedad>
+		<Propiedad  ID="http://schema.org/actoresComunActor" EntidadID="http://schema.org/Person">
+			<AtrNombre></AtrNombre>
+			<AtrNombreLectura></AtrNombreLectura>
+			<SeleccionEntidad>
+				<NuevaPestanya>false</NuevaPestanya>
+				<TipoSeleccion>Autocompletar</TipoSeleccion>
+				<Grafo>mkgapelicula.owl</Grafo>
+				<Grafo>mkgapersona.owl</Grafo>
+				<UrlTipoEntSolicitada>http://schema.org/Person</UrlTipoEntSolicitada>
+				<LinkARecurso PropiedadID="http://schema.org/name"></LinkARecurso>
+				<PropsEntLectura>
+					<Propiedad  ID="http://schema.org/name" EntidadID="http://schema.org/Person">
+						<AtrNombre>Name</AtrNombre>
+						<AtrNombreLectura>Name</AtrNombreLectura>
+					</Propiedad>
+				</PropsEntLectura>
+				<Reciproca></Reciproca>
+				<ConsultaReciproca>
+					<![CDATA[
+						SELECT distinct ?actor 
+						WHERE {
+							?movie <http://schema.org/actor> ?sujeto . 
+							?movie <http://schema.org/actor> ?actor  
+							filter (?sujeto=@EntidadID@ && ?sujeto != ?actor)
+						} 
+						limit 5 
+					]]>
+				</ConsultaReciproca>
+			</SeleccionEntidad>
+		</Propiedad>
+		<Propiedad  ID="http://schema.org/actoresComunDirector" EntidadID="http://schema.org/Person">
+			<AtrNombre>http://schema.org/actoresComunDirector</AtrNombre>
+			<AtrNombreLectura>http://schema.org/actoresComunDirector</AtrNombreLectura>
+			<SeleccionEntidad>
+				<NuevaPestanya>false</NuevaPestanya>
+				<TipoSeleccion>Autocompletar</TipoSeleccion>
+				<Grafo>mkgapelicula.owl</Grafo>
+				<Grafo>mkgapersona.owl</Grafo>
+				<UrlTipoEntSolicitada>http://schema.org/Person</UrlTipoEntSolicitada>
+				<LinkARecurso PropiedadID="http://schema.org/name"></LinkARecurso>
+				<PropsEntLectura>
+					<Propiedad  ID="http://schema.org/name" EntidadID="http://schema.org/Person">
+						<AtrNombre>Name</AtrNombre>
+						<AtrNombreLectura>Name</AtrNombreLectura>
+					</Propiedad>					
+				</PropsEntLectura>
+				<Reciproca></Reciproca>
+				<ConsultaReciproca>
+					<![CDATA[SELECT distinct ?actor 
+					WHERE {
+					?movie <http://schema.org/director> ?sujeto. 
+					?movie <http://schema.org/actor> ?actor  
+					filter (?sujeto =@EntidadID@ && ?sujeto != ?actor)}
+					limit 5 ]]>
+				</ConsultaReciproca>
+			</SeleccionEntidad>
+		</Propiedad>
+		<Propiedad  ID="http://schema.org/directoresComunActor" EntidadID="http://schema.org/Person">
+			<AtrNombre></AtrNombre>
+			<AtrNombreLectura></AtrNombreLectura>
+			<SeleccionEntidad>
+				<NuevaPestanya>false</NuevaPestanya>
+				<TipoSeleccion>Autocompletar</TipoSeleccion>
+				<Grafo>mkgapelicula.owl</Grafo>
+				<Grafo>mkgapersona.owl</Grafo>
+				<UrlTipoEntSolicitada>http://schema.org/Person</UrlTipoEntSolicitada>
+				<LinkARecurso PropiedadID="http://schema.org/name"></LinkARecurso>
+				<PropsEntLectura>
+					<Propiedad  ID="http://schema.org/name" EntidadID="http://schema.org/Person">
+						<AtrNombre>Name</AtrNombre>
+						<AtrNombreLectura>Name</AtrNombreLectura>
+					</Propiedad>
+				</PropsEntLectura>
+				<Reciproca></Reciproca>
+				<ConsultaReciproca>
+					<![CDATA[SELECT distinct ?director 
+					WHERE {
+					?movie <http://schema.org/actor> ?actor. 
+					?movie <http://schema.org/director> ?director
+					filter (?actor=@EntidadID@ && ?actor != ?director)} 
+					limit 5 ]]>
+				</ConsultaReciproca>
+			</SeleccionEntidad>
+		</Propiedad>
+		<Propiedad  ID="http://schema.org/directoresComunDirector" EntidadID="http://schema.org/Person">
+			<AtrNombre>http://schema.org/directoresComunDirector</AtrNombre>
+			<AtrNombreLectura>http://schema.org/directoresComunDirector</AtrNombreLectura>
+			<SeleccionEntidad>
+				<NuevaPestanya>false</NuevaPestanya>
+				<TipoSeleccion>Autocompletar</TipoSeleccion>
+				<Grafo>mkgapelicula.owl</Grafo>
+				<Grafo>mkgapersona.owl</Grafo>
+				<UrlTipoEntSolicitada>http://schema.org/Person</UrlTipoEntSolicitada>
+				<LinkARecurso PropiedadID="http://schema.org/name"></LinkARecurso>
+				<PropsEntLectura>
+					<Propiedad  ID="http://schema.org/name" EntidadID="http://schema.org/Person">
+						<AtrNombre>Name</AtrNombre>
+						<AtrNombreLectura>Name</AtrNombreLectura>
+					</Propiedad>					
+				</PropsEntLectura>
+				<Reciproca></Reciproca>
+				<ConsultaReciproca>
+					<![CDATA[SELECT distinct ?director WHERE {
+					?movie <http://schema.org/director> ?sujeto. 
+					?movie <http://schema.org/director> ?director  
+					filter (?sujeto = @EntidadID@ && ?sujeto != ?director)} limit 5 ]]>
+				</ConsultaReciproca>
+			</SeleccionEntidad>
+		</Propiedad>
+		<Propiedad  ID="http://schema.org/name" EntidadID="http://schema.org/Person">
+			<AtrNombre>Nombre</AtrNombre>
+			<AtrNombreLectura>Nombre:</AtrNombreLectura>
+		</Propiedad>	
+		<Propiedad  ID="http://schema.org/image" EntidadID="http://schema.org/Person">
+			<AtrNombre>Imagen:</AtrNombre>
+			<AtrNombreLectura>Imagen:</AtrNombreLectura>
+			<TipoCampo>ImagenExterna</TipoCampo>
+		</Propiedad>		
+	</EspefPropiedad>
+	<EspefEntidad>
+		<Entidad  ID="http://schema.org/Person">
+			<AtrNombre>Persona</AtrNombre>
+			<AtrNombreLectura>Persona</AtrNombreLectura>			
+			<OrdenEntidad>
+				<Grupo class="formtheme02">
+					<Grupo class="fieldset">
+						<Grupo Tipo="fieldset" class="mediumLabels">
+                            <NameProp>http://schema.org/name</NameProp>
+							<NameProp>http://schema.org/image</NameProp>			
+						</Grupo>
+					</Grupo>
+				</Grupo>
+			</OrdenEntidad>
+			<OrdenEntidadLectura>
+				<Grupo classLectura="contentGroup contenidoPrincipal">
+					<Grupo classLectura="group title">
+						<Grupo Tipo="titulo">                            
+							<NameProp>http://schema.org/name</NameProp>
+							<NameProp>http://schema.org/image</NameProp>							
+						</Grupo>
+						<Grupo Tipo="subtitulo">                           
+						</Grupo>
+					</Grupo>
+				</Grupo>
+				<Grupo classLectura="group content semanticView">
+					<Grupo classLectura="group group_info">	
+						<Grupo classLectura="contentGroup">
+							<AtrNombreGrupo>Películas que ha dirigido</AtrNombreGrupo>
+                            <NameProp>http://schema.org/iDirector</NameProp>                             
+						</Grupo>
+						<Grupo classLectura="contentGroup">
+							<AtrNombreGrupo>Películas en las que ha actuado</AtrNombreGrupo>                           
+                            <NameProp>http://schema.org/iActors</NameProp> 
+						</Grupo>
+						<Grupo classLectura="contentGroup">
+							<AtrNombreGrupo>Actores que han actuado con este actor</AtrNombreGrupo>                    
+							<NameProp>http://schema.org/actoresComunActor</NameProp> 
+						</Grupo>
+						<Grupo classLectura="contentGroup">	
+							<AtrNombreGrupo>Directores que han trabajado con este actor</AtrNombreGrupo>  					
+							<NameProp>http://schema.org/directoresComunActor</NameProp>
+						</Grupo>
+						<Grupo classLectura="contentGroup">
+							<AtrNombreGrupo>Actores que han trabajdo con este director</AtrNombreGrupo>  	
+							<NameProp>http://schema.org/actoresComunDirector</NameProp> 
+						</Grupo>
+						<Grupo classLectura="contentGroup">
+							<AtrNombreGrupo>Directores que han trabajado con este director</AtrNombreGrupo>  
+							<NameProp>http://schema.org/directoresComunDirector</NameProp>
+						</Grupo>
+					</Grupo>
+				</Grupo>
+			</OrdenEntidadLectura>
+		</Entidad>
+	</EspefEntidad>
+</config>

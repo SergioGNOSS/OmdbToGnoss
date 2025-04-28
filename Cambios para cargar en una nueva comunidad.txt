@@ -1,0 +1,14 @@
+	Renombrar las ontologías (cambiar el nombre de los archivos OWL y XML)
+	Reemplazar el nombre de las ontologías dentro de los archivos (Ctrl + Shif + F en VSC o Notepad++)
+	Subir las ontologías (OWL + XML) a la comunidad
+	(Actualizar la solución con el proyecto de clases en la comunidad) [OPCIONAL si no se ha alterado nada de las ONTOLOGÍAS]
+	Descargar el OAuth de la comunidad (buscar ítem en el menú de administración de la comunidad), abrir el archivo y pegar su contenido dentro de 
+•	…….\OmdbToGnoss\OmdbToGnoss\Config\OAuth.config
+	Sustituir el nombre de las ontologías por el de las ontologías propias en el archivo Program.cs
+•	……..\OmdbToGnoss\OmdbToGnoss\Program.cs
+•	 
+	En tiempo de ejecución (se recomienda realizar una primera carga con un número pequeño de películas):
+•	 
+•	Realizar una carga desde cero asegura que el programa inicia una carga completa desde cero. En caso de querer continuar con una carga previa, se pueden dejar. En todo caso, para las personas con menos conocimientos lo mejor es cargar pocos recursos, ver que estos se han cargado bien, hacer un borrado masivo en la comunidad y volver a lanzar una carga masiva desde 0. Borrado manual de caché interna en:
+o	…\OmdbToGnoss\OMDbToGnoss\bin\Debug\Data/personas.csv
+o	…\OmdbToGnoss\OMDbToGnoss\bin\Debug\Data/peliculas.csv
